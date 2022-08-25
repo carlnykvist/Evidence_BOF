@@ -22,6 +22,9 @@ Modify the date/time and the filenames in the cna file. Load the provided aggres
 evidence
 ```
 
+![](/images/runningBof.png)
+
+
 ### Credits / References
 ##### Cobalt Strike - Beacon Object Files
 + https://www.cobaltstrike.com/help-beacon-object-files
