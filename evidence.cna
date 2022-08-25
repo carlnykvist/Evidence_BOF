@@ -1,0 +1,104 @@
+beacon_command_register(
+"evidence", 
+"Evidence collection.",
+"Synopsis: evidence");
+
+popup beacon_bottom {
+	item "Gather evidence" {
+		local('$bid');
+		foreach $bid ($1) {
+			evidence_gui($bid);
+		}
+		
+	}
+}
+
+
+sub evidence_gui {
+	local('$handle $data $args');
+	
+	$bid = $1;
+
+	# figure out the arch of this session
+	$barch  = barch($1);
+	
+
+	# read in the right BOF file
+	$handle = openf(script_resource("evidence.".$barch.".o"));
+	$data = readb($handle, -1);
+	closef($handle);
+
+	#if(size(@_) < 2)
+	#{
+	#	berror($bid, "Incorrect usage!");
+	#	berror($bid, beacon_command_detail("evidence"));
+	#	return;
+	#}
+
+
+	%phases = %(
+        1 => "2022.03.06 07:30:00 -0000",
+        2 => "2022.03.07 11:00:00 -0000",
+        3 => "2022.03.08 07:00:00 -0000",
+        4 => "2022.03.09 11:00:00 -0000",
+    );
+    %evidence = %(
+        1 => "C:\\users\\dev\\Downloads\\phase1.txt",
+        2 => "C:\\users\\dev\\Downloads\\phase2.txt",
+        3 => "C:\\users\\dev\\Downloads\\phase3.txt",
+        4 => "C:\\users\\dev\\Downloads\\phase4.txt",
+    );
+
+    foreach $phase (sort({return $2 <=> $1;}, keys(%phases))) {
+    	if (parseDate("yyyy.MM.dd HH:mm:ss Z", %phases[$phase]) <= ticks()) {
+
+    		
+			$args = bof_pack($bid, "z", %evidence[$phase]);   # pack our arguments 	  
+			btask($bid, "Evidence collection (by Carl Nykvist)");	
+			beacon_inline_execute($bid, $data, "go", $args);  # execute it.
+			break;
+    	}
+    }
+
+}
+
+alias evidence {
+	local('$handle $data $args');
+	
+	$bid = $1;
+
+	# figure out the arch of this session
+	$barch  = barch($1);
+	
+
+	# read in the right BOF file
+	$handle = openf(script_resource("evidence.".$barch.".o"));
+	$data = readb($handle, -1);
+	closef($handle);
+
+	%phases = %(
+        1 => "2022.03.06 07:30:00 -0000",
+        2 => "2022.03.07 11:00:00 -0000",
+        3 => "2022.03.08 07:00:00 -0000",
+        4 => "2022.03.09 11:00:00 -0000",
+    );
+    %evidence = %(
+        1 => "C:\\users\\joker\\Downloads\\phase1.txt",
+        2 => "C:\\users\\joker\\Downloads\\phase2.txt",
+        3 => "C:\\users\\joker\\Downloads\\phase3.txt",
+        4 => "C:\\users\\joker\\Downloads\\phase4.txt",
+    );
+
+    foreach $phase (sort({return $2 <=> $1;}, keys(%phases))) {
+    	if (parseDate("yyyy.MM.dd HH:mm:ss Z", %phases[$phase]) <= ticks()) {
+    		
+			$args = bof_pack($bid, "z", %evidence[$phase]);   # pack our arguments 	  
+			btask($bid, "Evidence collection (by Carl Nykvist)");	
+			beacon_inline_execute($bid, $data, "go", $args);  # execute it.
+			break;
+    	}
+    }
+
+}
+
+
