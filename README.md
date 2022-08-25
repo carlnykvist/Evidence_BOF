@@ -16,7 +16,7 @@ make
 
 ## Usage
 
-Modify the date/time and the filenames in the cna file. Load the provided aggressor script.  run the command:
+Modify the date/time and the filenames in the cna file. Load the provided aggressor script and run the command:
 
 ```
 evidence
