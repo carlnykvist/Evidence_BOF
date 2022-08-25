@@ -24,6 +24,7 @@ evidence
 
 ![](/images/runningBof.png)
 
+You can also run it by right clicking on a beacon and choosing "Gather evidence".
 
 ### Credits / References
 ##### Cobalt Strike - Beacon Object Files
