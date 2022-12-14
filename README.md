@@ -1,6 +1,6 @@
 # Evidence_BOF
 
-Cobalt Strike Beacon Object File (BOF) that leverages Native APIs to get evidence for a machine in he Locked Shields exercise. The evidence consisted of three parts: 
+Cobalt Strike Beacon Object File (BOF) that leverages Native APIs to get evidence for a machine in the Locked Shields exercise. The evidence consisted of three parts: 
 Current time
 Computername and domain name
 Current user and integrity
